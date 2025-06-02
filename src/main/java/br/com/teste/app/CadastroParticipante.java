@@ -1,14 +1,14 @@
 package br.com.teste.app;
 
 import br.com.teste.model.Participante;
-// Importa o serviço
+import br.com.teste.service.ParticipanteService;
 import java.util.Scanner;
 
 public class CadastroParticipante {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        //  ParticipanteService service = new ParticipanteService(); Instancia o serviço
+        ParticipanteService service = new ParticipanteService();
 
         System.out.println("Cadastro de Participante ");
 
@@ -31,13 +31,13 @@ public class CadastroParticipante {
         novoParticipante.setEmail(emailParticipante);
         novoParticipante.setCpf(cpfParticipante);
 
-        //service
-        //Participante participanteSalvo = service.salvarParticipante(novoParticipante);
+
+        Participante participanteSalvo = service.salvarParticipante(novoParticipante);
 
 
         System.out.println("\nParticipante Cadastrado com Sucesso");
-        //System.out.println("Detalhes: " + participanteSalvo);
-        //System.out.println("ID Gerado: " + participanteSalvo.getId_participante());
+        System.out.println("Detalhes: " + participanteSalvo);
+        System.out.println("ID Gerado: " + participanteSalvo.getId_participante());
 
         scanner.close();
         System.out.println("\nCadastro concluído!");

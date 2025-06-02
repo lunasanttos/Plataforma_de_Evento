@@ -1,7 +1,7 @@
 package br.com.teste.app;
 
 import br.com.teste.model.Local;
-// Importar o serviço
+import br.com.teste.service.LocalService;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -9,7 +9,7 @@ public class CadastroLocal {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        //LocalService service = new LocalService();//  Instancia o serviço
+        LocalService service = new LocalService();
 
         System.out.println(" Cadastro de Local ");
 
@@ -40,13 +40,13 @@ public class CadastroLocal {
         novoLocal.setEndereco(enderecoLocal);
         novoLocal.setCapacidade(capacidadeLocal);
 
-        // Chama o serviço para salvar o local.
-        // Local localSalvo = service.salvarLocal(novoLocal);
+
+        Local localSalvo = service.salvarLocal(novoLocal);
 
 
         System.out.println("\n--- Local Cadastrado com Sucesso ---");
-       // System.out.println("Detalhes: " + localSalvo);
-       // System.out.println("ID Gerado: " + localSalvo.getId_local());
+        System.out.println("Detalhes: " + localSalvo);
+        System.out.println("ID Gerado: " + localSalvo.getId_local());
 
         scanner.close();
         System.out.println("\nCadastro concluído!");

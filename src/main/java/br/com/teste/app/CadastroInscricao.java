@@ -3,7 +3,7 @@ package br.com.teste.app;
 import br.com.teste.model.Inscricao;
 import br.com.teste.model.Evento;
 import br.com.teste.model.Participante;
-// Importa o serviço
+//import br.com.teste.service.
 import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Scanner;

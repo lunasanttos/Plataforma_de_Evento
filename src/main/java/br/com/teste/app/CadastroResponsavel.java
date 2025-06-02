@@ -1,15 +1,15 @@
 package br.com.teste.app;
 
 import br.com.teste.model.Responsavel;
-// SERVICE
-import java.util.InputMismatchException;
+import br.com.teste.service.ResponsavelService;
+
 import java.util.Scanner;
 
 public class CadastroResponsavel {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // ResponsavelService service = new ResponsavelService(); Instancia o serviço
+        ResponsavelService service = new ResponsavelService();
 
         System.out.println(" Cadastro de Responsável ");
 
@@ -29,13 +29,13 @@ public class CadastroResponsavel {
         novoResponsavel.setNome(nomeResponsavel);
         novoResponsavel.setEmail(emailResponsavel);
 
-        //service
-        //  Responsavel responsavelSalvo = service.salvarResponsavel(novoResponsavel);
+
+        Responsavel responsavelSalvo = service.salvarResponsavel(novoResponsavel);
 
 
         System.out.println("\n Responsável Cadastrado com Sucesso ");
-       // System.out.println("Detalhes: " + responsavelSalvo);
-       // System.out.println("ID: " + responsavelSalvo.getId_responsavel());
+        System.out.println("Detalhes: " + responsavelSalvo);
+        System.out.println("ID: " + responsavelSalvo.getId_responsavel());
 
         scanner.close();
         System.out.println("\nCadastro concluído!");

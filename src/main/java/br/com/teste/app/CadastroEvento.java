@@ -2,9 +2,9 @@ package br.com.teste.app;
 
 import br.com.teste.model.Evento;
 import br.com.teste.model.Local;
+import br.com.teste.service.EventoService;
 import java.time.LocalDate;
 import java.time.LocalTime;
-//IMPORTAR SERVICE
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
@@ -14,7 +14,7 @@ public class CadastroEvento {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-       // EventoService service = new EventoService(); // Instancia o serviço
+       EventoService service = new EventoService();
 
         System.out.println("Cadastro do evento");
 
@@ -74,8 +74,8 @@ public class CadastroEvento {
             }
         }
         scanner.nextLine();
-        // SERVICE
-      //  Local localSelecionado = service.buscarLocalPorId(idLocal);
+
+        Local localSelecionado = service.buscarLocalPorId(idLocal);
 
 
         Evento novoEvento = new Evento();
@@ -84,16 +84,16 @@ public class CadastroEvento {
         novoEvento.setData(dataEvento);
         novoEvento.setHora(horaEvento);
         novoEvento.setDescricao(descricaoEvento);
-       // novoEvento.setLocal(localSelecionado);
+        novoEvento.setLocal(localSelecionado);
 
-        // Chama o serviço para salvar o evento
-        //Evento eventoSalvo = service.salvarEvento(novoEvento);
+
+        Evento eventoSalvo = service.salvarEvento(novoEvento);
 
 
         System.out.println("\nEvento Cadastrado com Sucesso ");
-        //System.out.println("Detalhes: " + eventoSalvo);
-       // System.out.println("ID: " + eventoSalvo.getId_evento());
-        //System.out.println("Local (ID): " + eventoSalvo.getLocal().getId_local());
+        System.out.println("Detalhes: " + eventoSalvo);
+        System.out.println("ID: " + eventoSalvo.getId_evento());
+        System.out.println("Local (ID): " + eventoSalvo.getLocal().getId_local());
 
 
         scanner.close();
