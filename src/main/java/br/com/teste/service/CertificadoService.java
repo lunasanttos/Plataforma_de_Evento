@@ -9,7 +9,7 @@ public class CertificadoService {
     private CertificadoDao certificadoDao;
 
     public CertificadoService(){
-        this.certificadoDao = new CertificadoDao();
+        this.certificadoDao = new CertificadoDao(); // Sua versão: usa 'this' (melhor prática)
     }
 
     public ResultSet listar(){
@@ -27,7 +27,7 @@ public class CertificadoService {
 
     public boolean excluir(Certificado certificado){
 
-        if (certificado.getId_certificado() == 0)
+        if (certificado.getId_certificado() == 0) // Sua versão: usa getId_certificado() (correto conforme seu modelo)
             return false;
 
         certificadoDao.excluir(certificado);
@@ -51,5 +51,4 @@ public class CertificadoService {
 
         return true;
     }
-
 }

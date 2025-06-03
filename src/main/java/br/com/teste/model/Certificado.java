@@ -47,6 +47,7 @@ public class Certificado {
         this.codigo_verificacao = codigo_verificacao;
     }
 
+
     @Override
     public String toString() {
         String detalhesInscricao = (inscricao != null) ?
