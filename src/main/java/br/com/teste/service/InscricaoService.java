@@ -1,15 +1,24 @@
 package br.com.teste.service;
-
-import br.com.teste.dao.InscricaoDao;
-import java.sql.ResultSet;
 import br.com.teste.model.Inscricao;
+import br.com.teste.dao.InscricaoDao;
+
+import java.sql.ResultSet;
+import br.com.teste.model.Evento;
+import br.com.teste.model.Participante;
+import br.com.teste.dao.EventoDao;
+import br.com.teste.dao.ParticipanteDao;
+
 
 public class InscricaoService {
 
     private InscricaoDao inscricaoDao;
+    private EventoDao eventoDao;
+    private ParticipanteDao participanteDao;
 
-    public IntroducaoService(){
+    public InscricaoService(){
         inscricaoDao = new InscricaoDao();
+        eventoDao = new EventoDao();
+        participanteDao = new ParticipanteDao();
     }
 
     public ResultSet listar(){
@@ -24,7 +33,7 @@ public class InscricaoService {
     }
 
     public boolean excluir(Inscricao inscricao){
-        if (inscricao.getIdInscricao() == 0)
+        if (inscricao.getId_inscricao() == 0)
             return false;
         inscricaoDao.excluir(inscricao);
         return true;
@@ -37,12 +46,23 @@ public class InscricaoService {
         return true;
     }
     public boolean validar(Inscricao inscricao){
-        if (inscricao.getDataInscricao() == 0)
+        if (inscricao.getDataInscricao() == null ||
+                inscricao.getEvento() == null || inscricao.getParticipante() == null)
             return false;
 
-        if (inscricao.getDataInscricao.isEmpty())
+        if (inscricao.getEvento().getId_evento() == 0 ||
+                inscricao.getParticipante().getId_participante() == 0) {
             return false;
+        }
 
         return true;
+    }
+
+    public Evento buscarEventoPorId(int idEvento) {
+        return null;
+    }
+
+    public Participante buscarParticipantePorId(int idParticipante) {
+        return null;
     }
 }

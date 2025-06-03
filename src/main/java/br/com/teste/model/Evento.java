@@ -26,7 +26,7 @@ public class Evento {
     public int getId_evento() {
         return id_evento;
     }
-    public void setIdEvento(int id_evento) {
+    public void setId_evento(int id_evento) {
         this.id_evento = id_evento;
     }
 
@@ -71,6 +71,4 @@ public class Evento {
     public void setId_Local(Local id_Local) {
         this.local = id_Local;
     }
-
-
 }

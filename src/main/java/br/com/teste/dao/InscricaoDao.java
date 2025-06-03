@@ -3,12 +3,12 @@ package br.com.teste.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date; // Para trabalhar com datas no SQL
+import java.sql.Date;
 
 import br.com.teste.model.Inscricao;
 import br.com.teste.model.Evento;
 import br.com.teste.model.Participante;
-import br.com.teste.conf.Conexao;
+import br.com.teste.config.Conexao;
 
 public class InscricaoDao {
 
@@ -25,6 +25,7 @@ public class InscricaoDao {
                     .createStatement().executeQuery("SELECT * FROM inscricao");
         } catch (SQLException ex) {
             ex.printStackTrace();
+            System.out.println("Ocorreu um erro ao listar inscrições.");
         }
         return null;
     }
@@ -36,10 +37,8 @@ public class InscricaoDao {
 
             ps = conexao.getConn().prepareStatement(SQL);
 
-
             ps.setInt(1, inscricao.getEvento().getId_evento());
             ps.setInt(2, inscricao.getParticipante().getId_participante());
-
             ps.setDate(3, Date.valueOf(inscricao.getDataInscricao()));
 
             ps.executeUpdate();
@@ -62,6 +61,7 @@ public class InscricaoDao {
             ps.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
+            System.out.println("Ocorreu um erro ao excluir inscrição.");
         }
     }
 
@@ -76,7 +76,6 @@ public class InscricaoDao {
 
             ps.setInt(1, inscricao.getEvento().getId_evento());
             ps.setInt(2, inscricao.getParticipante().getId_participante());
-            // Converte LocalDate para java.sql.Date
             ps.setDate(3, Date.valueOf(inscricao.getDataInscricao()));
             ps.setInt(4, inscricao.getId_inscricao());
 
@@ -84,6 +83,7 @@ public class InscricaoDao {
             ps.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
+            System.out.println("Ocorreu um erro ao editar inscrição.");
         }
     }
 }

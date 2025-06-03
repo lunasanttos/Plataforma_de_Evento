@@ -1,8 +1,11 @@
 package br.com.teste.service;
-
-import br.com.teste.dao.CertificadoDao;
-import java.sql.ResultSet;
 import br.com.teste.model.Certificado;
+import br.com.teste.dao.CertificadoDao;
+import br.com.teste.dao.ParticipanteDao;
+
+
+import java.sql.ResultSet;
+
 
 public class CertificadoService {
     private ParticipanteDao certificadoDao;

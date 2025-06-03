@@ -11,7 +11,7 @@ public class Certificado {
 
     public Certificado(int id_certificado, Inscricao inscricao, LocalDate data_emissao, String codigo_verificacao) {
         this.id_certificado = id_certificado;
-        this.inscricao = new Inscricao();
+        this.inscricao = inscricao;
         this.data_emissao = data_emissao;
         this.codigo_verificacao = codigo_verificacao;
     }

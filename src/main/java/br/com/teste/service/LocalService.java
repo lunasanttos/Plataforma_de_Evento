@@ -1,8 +1,9 @@
 package br.com.teste.service;
-
 import br.com.teste.dao.LocalDao;
-import java.sql.ResultSet;
 import br.com.teste.model.Local;
+
+import java.sql.ResultSet;
+
 
 public class LocalService {
 
@@ -27,7 +28,8 @@ public class LocalService {
 
     public boolean excluir(Local local){
 
-        if (local.getIdLocal() == 0)
+
+        if (local.getId_local() == 0)
             return false;
 
         localDao.excluir(local);
@@ -44,13 +46,14 @@ public class LocalService {
     }
     public boolean validar(Local local){
 
-        if (local.getNome() == null || local.getEndereco == null || local.getCapacidade == 0)
+
+        if (local.getNome() == null || local.getEndereco() == null || local.getCapacidade() == 0)
             return false;
 
-        if (local.getNome().isEmpty() || local.getendereco().isEmpty() || local.getCapacidade().isEmpty())
+
+        if (local.getNome().isEmpty() || local.getEndereco().isEmpty())
             return false;
 
         return true;
     }
-
 }

@@ -29,7 +29,7 @@ public class Responsavel {
     public String getEmail() {
         return email;
     }
-    public void setEmail(String matricula) {
+    public void setEmail(String email) {
         this.email = email;
     }
 }

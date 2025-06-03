@@ -1,10 +1,12 @@
 package br.com.teste.dao;
+import br.com.teste.config.Conexao;
+import br.com.teste.model.Responsavel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import br.com.teste.model.Responsavel;
-import br.com.teste.conf.Conexao;
+
+
 
 public class ResponsavelDao {
 
@@ -21,6 +23,7 @@ public class ResponsavelDao {
                     .createStatement().executeQuery("SELECT * FROM responsavel");
         } catch (SQLException ex) {
             ex.printStackTrace();
+            System.out.println("Ocorreu um erro ao listar responsáveis.");
         }
         return null;
     }
@@ -58,11 +61,13 @@ public class ResponsavelDao {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+            System.out.println("Ocorreu um erro ao excluir responsável.");
         }
     }
 
     public void editar(Responsavel responsavel){
         try {
+
             String SQL = "UPDATE responsavel SET nome = ?" + " email = ? " + "WHERE id_responsavel = ?";
 
             ps = conexao.getConn().prepareStatement(SQL);
@@ -76,6 +81,7 @@ public class ResponsavelDao {
             ps.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
+            System.out.println("Ocorreu um erro ao editar responsável.");
         }
     }
 }

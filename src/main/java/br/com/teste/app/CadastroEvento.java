@@ -5,6 +5,7 @@ import br.com.teste.model.Local;
 import br.com.teste.service.EventoService;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
@@ -75,26 +76,34 @@ public class CadastroEvento {
         }
         scanner.nextLine();
 
-        Local localSelecionado = service.buscarLocalPorId(idLocal);
+        Local localSelecionado = new Local(idLocal);
 
 
-        Evento novoEvento = new Evento();
-        novoEvento.setNome(nomeEvento);
-        novoEvento.setTipo(tipoEvento);
-        novoEvento.setData(dataEvento);
-        novoEvento.setHora(horaEvento);
-        novoEvento.setDescricao(descricaoEvento);
-        novoEvento.setLocal(localSelecionado);
+        Evento novoEvento = new Evento(
+                0,
+                nomeEvento,
+                tipoEvento,
+                dataEvento,
+                horaEvento,
+                descricaoEvento,
+                localSelecionado
+        );
+        boolean eventoSalvo = service.inserir(novoEvento);
 
-
-        Evento eventoSalvo = service.salvarEvento(novoEvento);
-
-
-        System.out.println("\nEvento Cadastrado com Sucesso ");
-        System.out.println("Detalhes: " + eventoSalvo);
-        System.out.println("ID: " + eventoSalvo.getId_evento());
-        System.out.println("Local (ID): " + eventoSalvo.getLocal().getId_local());
-
+        if (eventoSalvo) { // Verifica o retorno booleano do método inserir
+            System.out.println("\nEvento Cadastrado com Sucesso!");
+            System.out.println("Detalhes:");
+            System.out.println("Nome: " + novoEvento.getNome());
+            System.out.println("Tipo: " + novoEvento.getTipo());
+            System.out.println("Data: " + novoEvento.getData().format(dateFormatter));
+            System.out.println("Hora: " + novoEvento.getHora().format(timeFormatter));
+            System.out.println("Descrição: " + novoEvento.getDescricao());
+            System.out.println("Local (ID): " + novoEvento.getId_Local().getId_local()); // Acessa o ID do Local
+            // Observação: O ID real gerado pelo banco de dados não está sendo atualizado no objeto `novoEvento`
+            // após a inserção nesta estrutura. Para isso, o DAO precisaria retornar o ID ou atualizar o objeto.
+        } else {
+            System.out.println("\nFalha ao cadastrar evento. Verifique os dados inseridos.");
+        }
 
         scanner.close();
         System.out.println("\nCadastro de evento concluído!");

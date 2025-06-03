@@ -24,18 +24,24 @@ public class CadastroResponsavel {
         System.out.print("Email do Responsável: ");
         emailResponsavel = scanner.nextLine();
 
-
-        Responsavel novoResponsavel = new Responsavel();
-        novoResponsavel.setNome(nomeResponsavel);
-        novoResponsavel.setEmail(emailResponsavel);
-
-
-        Responsavel responsavelSalvo = service.salvarResponsavel(novoResponsavel);
+        Responsavel novoResponsavel = new Responsavel(
+                0,
+                nomeResponsavel,
+                emailResponsavel
+        );
 
 
-        System.out.println("\n Responsável Cadastrado com Sucesso ");
-        System.out.println("Detalhes: " + responsavelSalvo);
-        System.out.println("ID: " + responsavelSalvo.getId_responsavel());
+        boolean responsavelFoiSalvo = service.inserir(novoResponsavel);
+
+        if (responsavelFoiSalvo) {
+            System.out.println("\n Responsável Cadastrado com Sucesso ");
+            System.out.println("Detalhes:");
+            System.out.println("Nome: " + novoResponsavel.getNome());
+            System.out.println("Email: " + novoResponsavel.getEmail());
+            System.out.println("ID (informado, não o gerado pelo BD): " + novoResponsavel.getId_responsavel()); // Será 0
+        } else {
+            System.out.println("\nFalha ao cadastrar responsável. Verifique os dados.");
+        }
 
         scanner.close();
         System.out.println("\nCadastro concluído!");

@@ -1,8 +1,9 @@
 package br.com.teste.service;
-
-import br.com.teste.dao.ResponsavelDao;
-import java.sql.ResultSet;
 import br.com.teste.model.Responsavel;
+import br.com.teste.dao.ResponsavelDao;
+
+import java.sql.ResultSet;
+
 
 public class ResponsavelService {
     private ResponsavelDao responsavelDao;
@@ -23,7 +24,7 @@ public class ResponsavelService {
     }
 
     public boolean excluir(Responsavel responsavel){
-        if (responsavel.getIdResponsavel() == 0)
+        if (responsavel.getId_responsavel() == 0)
             return false;
         responsavelDao.excluir(responsavel);
         return true;

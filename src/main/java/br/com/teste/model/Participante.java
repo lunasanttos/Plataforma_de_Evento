@@ -13,6 +13,7 @@ public class Participante {
         this.cpf = cpf;
     }
 
+
     public int getId_participante() {
         return id_participante;
     }
@@ -40,5 +41,4 @@ public class Participante {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
 }

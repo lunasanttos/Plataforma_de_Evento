@@ -1,8 +1,11 @@
 package br.com.teste.service;
 
-import br.com.teste.dao.ParticipanteDao;
-import java.sql.ResultSet;
 import br.com.teste.model.Participante;
+import br.com.teste.dao.ParticipanteDao;
+
+
+import java.sql.ResultSet;
+
 
 public class ParticipanteService {
 
@@ -10,10 +13,7 @@ public class ParticipanteService {
 
     public ParticipanteService(){
         participanteDao = new ParticipanteDao();
-    }
 
-    public Responsavel salvarResponsavel(Responsavel responsavel) {
-        return responsavelDao.inserir(responsavel);
     }
 
     public ResultSet listar(){
@@ -31,7 +31,8 @@ public class ParticipanteService {
 
     public boolean excluir(Participante participante){
 
-        if (participante.getIdParticipante() == 0)
+
+        if (participante.getId_participante() == 0)
             return false;
 
         participanteDao.excluir(participante);
@@ -48,7 +49,7 @@ public class ParticipanteService {
     }
     public boolean validar(Participante participante){
 
-        if (participante.getNome() == null || participante.getEmail == null || participante.getCpf == null)
+        if (participante.getNome() == null || participante.getEmail() == null || participante.getCpf() == null)
             return false;
 
         if (participante.getNome().isEmpty() || participante.getEmail().isEmpty() || participante.getCpf().isEmpty())

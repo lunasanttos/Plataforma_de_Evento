@@ -35,18 +35,31 @@ public class CadastroLocal {
         scanner.nextLine();
 
 
-        Local novoLocal = new Local();
+        Local novoLocal = new Local(
+                0,
+                nomeLocal,
+                enderecoLocal,
+                capacidadeLocal
+        );
         novoLocal.setNome(nomeLocal);
         novoLocal.setEndereco(enderecoLocal);
         novoLocal.setCapacidade(capacidadeLocal);
 
 
-        Local localSalvo = service.salvarLocal(novoLocal);
+       boolean localSalvo = service.inserir(novoLocal);
 
 
-        System.out.println("\n--- Local Cadastrado com Sucesso ---");
-        System.out.println("Detalhes: " + localSalvo);
-        System.out.println("ID Gerado: " + localSalvo.getId_local());
+        if (localSalvo) {
+            System.out.println("\nLocal Cadastrado com Sucesso");
+            System.out.println("Detalhes:");
+            System.out.println("Nome: " + novoLocal.getNome());
+            System.out.println("Endereço: " + novoLocal.getEndereco());
+            System.out.println("Capacidade: " + novoLocal.getCapacidade());
+            System.out.println("ID): " + novoLocal.getId_local());
+        } else {
+            System.out.println("\nFalha ao salvar local. Verifique os dados.");
+        }
+
 
         scanner.close();
         System.out.println("\nCadastro concluído!");

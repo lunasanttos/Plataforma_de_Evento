@@ -25,19 +25,26 @@ public class CadastroParticipante {
         String cpfParticipante = scanner.nextLine();
 
 
-        Participante novoParticipante = new Participante();
+        Participante novoParticipante = new Participante(
+                0,
+                nomeParticipante,
+                emailParticipante,
+                cpfParticipante
+        );
 
-        novoParticipante.setNome(nomeParticipante);
-        novoParticipante.setEmail(emailParticipante);
-        novoParticipante.setCpf(cpfParticipante);
+        boolean participanteFoiSalvo = service.inserir(novoParticipante);
 
 
-        Participante participanteSalvo = service.salvarParticipante(novoParticipante);
-
-
-        System.out.println("\nParticipante Cadastrado com Sucesso");
-        System.out.println("Detalhes: " + participanteSalvo);
-        System.out.println("ID Gerado: " + participanteSalvo.getId_participante());
+        if (participanteFoiSalvo) {
+            System.out.println("\nParticipante Cadastrado com Sucesso");
+            System.out.println("Detalhes:");
+            System.out.println("Nome: " + novoParticipante.getNome());
+            System.out.println("Email: " + novoParticipante.getEmail());
+            System.out.println("CPF: " + novoParticipante.getCpf());
+            System.out.println("ID (informado, não o gerado pelo BD): " + novoParticipante.getId_participante()); // Será 0
+        } else {
+            System.out.println("\nFalha ao cadastrar participante. Verifique os dados.");
+        }
 
         scanner.close();
         System.out.println("\nCadastro concluído!");
