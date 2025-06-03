@@ -2,7 +2,7 @@ package br.com.teste.service;
 
 import br.com.teste.dao.LocalDao;
 import java.sql.ResultSet;
-import br.com.teste.model.Responsavel;
+import br.com.teste.model.Local;
 
 public class LocalService {
 

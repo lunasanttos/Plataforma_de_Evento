@@ -2,7 +2,7 @@ package br.com.teste.service;
 
 import br.com.teste.dao.ParticipanteDao;
 import java.sql.ResultSet;
-import br.com.teste.model.Responsavel;
+import br.com.teste.model.Participante;
 
 public class ParticipanteService {
 
@@ -10,6 +10,10 @@ public class ParticipanteService {
 
     public ParticipanteService(){
         participanteDao = new ParticipanteDao();
+    }
+
+    public Responsavel salvarResponsavel(Responsavel responsavel) {
+        return responsavelDao.inserir(responsavel);
     }
 
     public ResultSet listar(){

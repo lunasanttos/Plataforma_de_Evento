@@ -10,11 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
 
-/**
- *
- * @author yande
- */
-//Yanderson que fez.
 public class CertificadoDao {
 
     private Conexao conexao;

@@ -6,6 +6,13 @@ public class Participante {
     private String email;
     private String cpf;
 
+    public Participante(int id_participante, String nome, String email, String cpf) {
+        this.id_participante = id_participante;
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+    }
+
     public int getId_participante() {
         return id_participante;
     }
