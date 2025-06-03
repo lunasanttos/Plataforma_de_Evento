@@ -44,6 +44,16 @@ public class Certificado {
     }
 
     public void setCodigo_verificacao(String codigo_verificacao) {
+
         this.codigo_verificacao = codigo_verificacao;
+    }
+
+    public int getId_Certificado() {
+        return id_certificado;
+    }
+
+    public void setIdCertificado(int idCertificado) {
+
+        this.id_certificado = idCertificado;
     }
 }
