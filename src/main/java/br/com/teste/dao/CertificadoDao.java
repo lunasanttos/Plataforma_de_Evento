@@ -13,7 +13,9 @@ public class CertificadoDao {
     private Conexao conexao;
     private PreparedStatement ps;
 
-
+    public CertificadoDao() {
+        this.conexao = new Conexao();
+    }
 
     public ResultSet listar(){
         try {
@@ -21,6 +23,7 @@ public class CertificadoDao {
                     .createStatement().executeQuery("SELECT * FROM certificado");
         } catch (SQLException ex) {
             ex.printStackTrace();
+            System.out.println("Ocorreu um erro ao listar certificados.");
         }
 
         return null;
@@ -60,6 +63,7 @@ public class CertificadoDao {
             ps.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
+            System.out.println("Ocorreu um erro ao excluir certificado.");
         }
     }
 
@@ -82,6 +86,7 @@ public class CertificadoDao {
             ps.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
+            System.out.println("Ocorreu um erro ao editar certificado.");
         }
     }
 

@@ -27,6 +27,39 @@ public class ParticipanteDao {
         return null;
     }
 
+    public Participante buscarPorId(int id) {
+        String SQL = "SELECT id_participante, nome, cpf, email FROM participante WHERE id_participante = ?";
+        ResultSet rs = null;
+        PreparedStatement psBuscar = null;
+
+        try {
+            psBuscar = conexao.getConn().prepareStatement(SQL);
+            psBuscar.setInt(1, id);
+            rs = psBuscar.executeQuery();
+
+            if (rs.next()) {
+                return new Participante(
+                        rs.getInt("id_participante"),
+                        rs.getString("nome"),
+                        rs.getString("email"),
+                        rs.getString("cpf")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erro ao buscar participante por ID.");
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (psBuscar != null) psBuscar.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
     public void inserir(Participante participante) {
         try {
             String SQL = "INSERT INTO participante(id_participante, nome, cpf, email) VALUES (?, ?, ?, ?)";

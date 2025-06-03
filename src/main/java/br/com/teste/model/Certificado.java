@@ -46,4 +46,19 @@ public class Certificado {
     public void setCodigo_verificacao(String codigo_verificacao) {
         this.codigo_verificacao = codigo_verificacao;
     }
+
+    @Override
+    public String toString() {
+        String detalhesInscricao = (inscricao != null) ?
+                "Inscrição ID: " + inscricao.getId_inscricao() +
+                        ", Evento: " + (inscricao.getEvento() != null ? inscricao.getEvento().getNome() : "N/A") +
+                        ", Participante: " + (inscricao.getParticipante() != null ? inscricao.getParticipante().getNome() : "N/A") :
+                "Inscrição: N/A";
+
+        return "Detalhes do Certificado:\n" +
+                "  ID Certificado (esperado, se BD auto-incrementa): " + id_certificado + "\n" +
+                "  Data de Emissão: " + data_emissao + "\n" +
+                "  Código de Verificação: " + codigo_verificacao + "\n" +
+                "  " + detalhesInscricao;
+    }
 }

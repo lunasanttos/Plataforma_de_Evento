@@ -22,7 +22,7 @@ public class InscricaoService {
     }
 
     public ResultSet listar(){
-        return  inscricaoDao.listar();
+        return inscricaoDao.listar();
     }
 
     public boolean inserir(Inscricao inscricao){
@@ -58,11 +58,17 @@ public class InscricaoService {
         return true;
     }
 
+
     public Evento buscarEventoPorId(int idEvento) {
-        return null;
+        return eventoDao.buscarPorId(idEvento);
     }
 
     public Participante buscarParticipantePorId(int idParticipante) {
-        return null;
+        return participanteDao.buscarPorId(idParticipante);
+    }
+
+
+    public Inscricao buscarInscricaoPorId(int idInscricao) {
+        return inscricaoDao.buscarPorId(idInscricao);
     }
 }

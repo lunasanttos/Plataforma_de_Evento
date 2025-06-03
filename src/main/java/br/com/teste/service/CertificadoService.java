@@ -1,17 +1,15 @@
 package br.com.teste.service;
 import br.com.teste.model.Certificado;
 import br.com.teste.dao.CertificadoDao;
-import br.com.teste.dao.ParticipanteDao;
-
 
 import java.sql.ResultSet;
 
 
 public class CertificadoService {
-    private ParticipanteDao certificadoDao;
+    private CertificadoDao certificadoDao;
 
     public CertificadoService(){
-        certificadoDao = new ParticipanteDao();
+        this.certificadoDao = new CertificadoDao();
     }
 
     public ResultSet listar(){
@@ -29,7 +27,7 @@ public class CertificadoService {
 
     public boolean excluir(Certificado certificado){
 
-        if (certificado.getIdCertificado() == 0)
+        if (certificado.getId_certificado() == 0)
             return false;
 
         certificadoDao.excluir(certificado);

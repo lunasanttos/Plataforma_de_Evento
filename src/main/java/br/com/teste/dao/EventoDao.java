@@ -16,9 +16,11 @@ public class EventoDao {
 
     private Conexao conexao;
     private PreparedStatement ps;
+    private LocalDao localDao;
 
     public EventoDao(){
         this.conexao = new Conexao();
+        this.localDao = new LocalDao();
     }
 
     public ResultSet listar() {
@@ -28,6 +30,43 @@ public class EventoDao {
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println("Ocorreu um erro ao listar eventos.");
+        }
+        return null;
+    }
+    public Evento buscarPorId(int id) {
+        String SQL = "SELECT id_evento, nome, tipo, data, hora, descricao, id_local FROM evento WHERE id_evento = ?";
+        ResultSet rs = null;
+        PreparedStatement psBuscar = null;
+
+        try {
+            psBuscar = conexao.getConn().prepareStatement(SQL);
+            psBuscar.setInt(1, id);
+            rs = psBuscar.executeQuery();
+
+            if (rs.next()) {
+                int idLocal = rs.getInt("id_local");
+                Local local = localDao.buscarPorId(idLocal);
+
+                return new Evento(
+                        rs.getInt("id_evento"),
+                        rs.getString("nome"),
+                        rs.getString("tipo"),
+                        rs.getDate("data").toLocalDate(),
+                        rs.getTime("hora").toLocalTime(),
+                        rs.getString("descricao"),
+                        local // Passa o objeto Local completo
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Erro ao buscar evento por ID.");
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (psBuscar != null) psBuscar.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }

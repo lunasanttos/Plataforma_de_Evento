@@ -90,7 +90,7 @@ public class CadastroEvento {
         );
         boolean eventoSalvo = service.inserir(novoEvento);
 
-        if (eventoSalvo) { // Verifica o retorno booleano do método inserir
+        if (eventoSalvo) {
             System.out.println("\nEvento Cadastrado com Sucesso!");
             System.out.println("Detalhes:");
             System.out.println("Nome: " + novoEvento.getNome());
@@ -98,9 +98,8 @@ public class CadastroEvento {
             System.out.println("Data: " + novoEvento.getData().format(dateFormatter));
             System.out.println("Hora: " + novoEvento.getHora().format(timeFormatter));
             System.out.println("Descrição: " + novoEvento.getDescricao());
-            System.out.println("Local (ID): " + novoEvento.getId_Local().getId_local()); // Acessa o ID do Local
-            // Observação: O ID real gerado pelo banco de dados não está sendo atualizado no objeto `novoEvento`
-            // após a inserção nesta estrutura. Para isso, o DAO precisaria retornar o ID ou atualizar o objeto.
+            System.out.println("Local (ID): " + novoEvento.getId_Local().getId_local());
+
         } else {
             System.out.println("\nFalha ao cadastrar evento. Verifique os dados inseridos.");
         }
