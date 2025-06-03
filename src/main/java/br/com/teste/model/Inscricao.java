@@ -8,6 +8,12 @@ public class Inscricao {
     private Participante participante;
     private LocalDate dataInscricao;
 
+    public Inscricao(int id_inscricao, Evento evento, Participante participante, LocalDate dataInscricao) {
+        this.id_inscricao = id_inscricao;
+        this.evento = evento;
+        this.participante = participante;
+        this.dataInscricao = dataInscricao;
+    }
 
     public int getId_inscricao() {
         return id_inscricao;

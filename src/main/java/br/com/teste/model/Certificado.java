@@ -9,6 +9,13 @@ public class Certificado {
     private String codigo_verificacao;
 
 
+    public Certificado(int id_certificado, Inscricao inscricao, LocalDate data_emissao, String codigo_verificacao) {
+        this.id_certificado = id_certificado;
+        this.inscricao = new Inscricao();
+        this.data_emissao = data_emissao;
+        this.codigo_verificacao = codigo_verificacao;
+    }
+
     public int getId_certificado() {
         return id_certificado;
     }

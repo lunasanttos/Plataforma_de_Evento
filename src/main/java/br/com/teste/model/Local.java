@@ -6,6 +6,13 @@ public class Local {
     private String endereco;
     private int capacidade;
 
+    public Local(int id_local, String nome, String endereco, int capacidade) {
+        this.id_local = id_local;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.capacidade = capacidade;
+    }
+
     public int getId_local() {
         return id_local;
     }

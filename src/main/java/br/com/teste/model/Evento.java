@@ -13,6 +13,16 @@ public class Evento {
     private String descricao;
     private Local local;
 
+    public Evento(int id_evento, String nome, String tipo, LocalDate data, LocalTime hora, String descricao, Local local) {
+        this.id_evento = id_evento;
+        this.nome = nome;
+        this.tipo = tipo;
+        this.data = data;
+        this.hora = hora;
+        this.descricao = descricao;
+        this.local = local;
+    }
+
     public int getId_evento() {
         return id_evento;
     }

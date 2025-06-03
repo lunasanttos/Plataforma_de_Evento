@@ -2,13 +2,13 @@ package br.com.teste.service;
 
 import br.com.teste.dao.CertificadoDao;
 import java.sql.ResultSet;
-import br.com.teste.model.Responsavel;
+import br.com.teste.model.Certificado;
 
 public class CertificadoService {
-    private CertificadoDao certificadoDao;
+    private ParticipanteDao certificadoDao;
 
     public CertificadoService(){
-        certificadoDao = new CertificadoDao();
+        certificadoDao = new ParticipanteDao();
     }
 
     public ResultSet listar(){
