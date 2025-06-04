@@ -2,20 +2,23 @@ package br.com.teste.app;
 
 import br.com.teste.model.Evento;
 import br.com.teste.model.Local;
+import br.com.teste.model.Responsavel;
 import br.com.teste.service.EventoService;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class CadastroEvento {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-       EventoService service = new EventoService();
+        EventoService service = new EventoService();
 
         System.out.println("Cadastro do evento");
 
@@ -35,7 +38,7 @@ public class CadastroEvento {
                 dataEvento = LocalDate.parse(dataStr, dateFormatter);
                 dataValida = true;
             } catch (DateTimeParseException e) {
-                System.out.println("formato de data invalido.");
+                System.out.println("Formato de data inválido.");
             }
         }
 
@@ -44,19 +47,17 @@ public class CadastroEvento {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         while (!horaValida) {
             try {
-                System.out.print("Horario do Evento:");
+                System.out.print("Horário do Evento: ");
                 String horaStr = scanner.nextLine();
                 horaEvento = LocalTime.parse(horaStr, timeFormatter);
                 horaValida = true;
             } catch (DateTimeParseException e) {
-                System.out.println("Entrada Inválida.");
+                System.out.println("Entrada inválida.");
             }
         }
 
-
         System.out.print("Descrição do Evento: ");
         String descricaoEvento = scanner.nextLine();
-
 
         int idLocal = 0;
         boolean localIdValido = false;
@@ -65,7 +66,7 @@ public class CadastroEvento {
                 System.out.print("ID do Local: ");
                 idLocal = scanner.nextInt();
                 if (idLocal <= 0) {
-                    System.out.println("ID do Local invalido");
+                    System.out.println("ID do Local inválido");
                 } else {
                     localIdValido = true;
                 }
@@ -76,8 +77,42 @@ public class CadastroEvento {
         }
         scanner.nextLine();
 
-        Local localSelecionado = new Local(idLocal);
+        System.out.print("Quantidade de responsáveis para o evento: ");
+        int qtdResponsaveis = 0;
+        try {
+            qtdResponsaveis = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada inválida. Responsáveis não serão adicionados.");
+            scanner.nextLine();
+        }
+        scanner.nextLine();
 
+        List<Responsavel> responsaveis = new ArrayList<>();
+        for (int i = 0; i < qtdResponsaveis; i++) {
+            System.out.println("Dados do responsável " + (i + 1));
+
+            int idResp = 0;
+            System.out.print("ID do responsável: ");
+            try {
+                idResp = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("ID inválido. Pulando este responsável.");
+                scanner.nextLine();
+                continue;
+            }
+            scanner.nextLine();
+
+            System.out.print("Nome do responsável: ");
+            String nomeResp = scanner.nextLine();
+
+            System.out.print("Email do responsável: ");
+            String emailResp = scanner.nextLine();
+
+            Responsavel resp = new Responsavel(idResp, nomeResp, emailResp);
+            responsaveis.add(resp);
+        }
+
+        Local localSelecionado = new Local(idLocal);
 
         Evento novoEvento = new Evento(
                 0,
@@ -88,10 +123,14 @@ public class CadastroEvento {
                 descricaoEvento,
                 localSelecionado
         );
+
+
+        novoEvento.setResponsavelLista(responsaveis);
+
         boolean eventoSalvo = service.inserir(novoEvento);
 
         if (eventoSalvo) {
-            System.out.println("\nEvento Cadastrado com Sucesso!");
+            System.out.println("\nEvento cadastrado com sucesso!");
             System.out.println("Detalhes:");
             System.out.println("Nome: " + novoEvento.getNome());
             System.out.println("Tipo: " + novoEvento.getTipo());
@@ -99,7 +138,10 @@ public class CadastroEvento {
             System.out.println("Hora: " + novoEvento.getHora().format(timeFormatter));
             System.out.println("Descrição: " + novoEvento.getDescricao());
             System.out.println("Local (ID): " + novoEvento.getId_Local().getId_local());
-
+            System.out.println("Responsáveis:");
+            for (Responsavel r : responsaveis) {
+                System.out.println("  ID: " + r.getId_responsavel() + ", Nome: " + r.getNome() + ", Email: " + r.getEmail());
+            }
         } else {
             System.out.println("\nFalha ao cadastrar evento. Verifique os dados inseridos.");
         }
